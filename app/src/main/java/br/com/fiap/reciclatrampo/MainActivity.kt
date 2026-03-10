@@ -1,47 +1,48 @@
 package br.com.fiap.reciclatrampo
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
+import br.com.fiap.reciclatrampo.data.AppDatabase
+import br.com.fiap.reciclatrampo.data.repository.ColetaRepository
+import br.com.fiap.reciclatrampo.screens.CriarColetaScreen
 import br.com.fiap.reciclatrampo.ui.theme.ReciclaTrampoTheme
+import br.com.fiap.reciclatrampo.viewmodel.ColetaViewModel
+import br.com.fiap.reciclatrampo.viewmodel.ColetaViewModelFactory
 
 class MainActivity : ComponentActivity() {
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        // database
+        val database = AppDatabase.getDatabase(this)
+
+        // repository
+        val repository = ColetaRepository(database.coletaDao())
+
+        // viewmodel usando factory
+        val viewModel = ViewModelProvider(
+            this,
+            ColetaViewModelFactory(repository)
+        )[ColetaViewModel::class.java]
+
         setContent {
             ReciclaTrampoTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+
+                CriarColetaScreen(
+                    empresaId = 1,
+                    coletaViewModel = viewModel,
+                    onNavigateToHistorico = {
+                        // navegação aqui depois
+                    },
+                )
+
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ReciclaTrampoTheme {
-        Greeting("Android")
     }
 }
