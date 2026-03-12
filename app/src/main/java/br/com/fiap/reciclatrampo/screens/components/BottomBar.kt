@@ -1,5 +1,6 @@
 package br.com.fiap.reciclatrampo.screens.components
 
+import android.graphics.Color
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
@@ -8,10 +9,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import br.com.fiap.reciclatrampo.ui.theme.AmareloEscuro
+import br.com.fiap.reciclatrampo.ui.theme.VerdeClaro
+import br.com.fiap.reciclatrampo.ui.theme.White
 
 
 data class BottomNavigationItem(
@@ -40,20 +45,22 @@ fun BottomBar(
 
             NavigationBarItem(
                 selected = selectedIndex == index,
-
                 onClick = {
                     if (index == 0) onHistoricoClick()
                     if (index == 1) onCriarClick()
                 },
-
                 icon = {
                     Icon(
                         imageVector = item.icon,
                         contentDescription = item.title,
-                        tint = MaterialTheme.colorScheme.onSecondary,
                         modifier = Modifier.size(28.dp)
                     )
-                }
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = AmareloEscuro,
+                    unselectedIconColor = White,
+                    indicatorColor = androidx.compose.ui.graphics.Color.Transparent
+                )
             )
         }
     }

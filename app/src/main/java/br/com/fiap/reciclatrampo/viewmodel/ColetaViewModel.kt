@@ -1,6 +1,7 @@
 package br.com.fiap.reciclatrampo.viewmodel
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import br.com.fiap.reciclatrampo.data.repository.ColetaRepository
 import br.com.fiap.reciclatrampo.model.Coleta
@@ -19,10 +20,17 @@ open class ColetaViewModel(private val repository: ColetaRepository) : ViewModel
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun criarColeta(material: String, endereco: String, empresaId: Int,
-                    pesoEstimado: Double, data: LocalDate,
-                    hora: LocalTime) {
+    fun criarColeta(
+        material: String,
+        endereco: String,
+        empresaId: Int,
+        pesoEstimado: Double,
+        data: LocalDate,
+        hora: LocalTime
+    ) {
+
         viewModelScope.launch {
+
             repository.solicitarColeta(
                 Coleta(
                     material = material,
@@ -34,6 +42,7 @@ open class ColetaViewModel(private val repository: ColetaRepository) : ViewModel
                     pesoEstimado = pesoEstimado
                 )
             )
+            Log.d("COLETA_DEBUG", "Criando coleta")
         }
     }
 }

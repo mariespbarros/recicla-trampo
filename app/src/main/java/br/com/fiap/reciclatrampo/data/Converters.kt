@@ -8,23 +8,23 @@ import java.time.LocalTime
 class Converters {
 
     @TypeConverter
-    fun fromLocalDate(date: LocalDate): Long {
-        return date.toEpochDay()
+    fun fromLocalDate(date: LocalDate?): String? {
+        return date?.toString()
     }
 
     @TypeConverter
-    fun toLocalDate(value: Long): LocalDate {
-        return LocalDate.ofEpochDay(value)
+    fun toLocalDate(dateString: String?): LocalDate? {
+        return dateString?.let { LocalDate.parse(it) }
     }
 
     @TypeConverter
-    fun fromLocalTime(time: LocalTime): String {
-        return time.toString()
+    fun fromLocalTime(time: LocalTime?): String? {
+        return time?.toString()
     }
 
     @TypeConverter
-    fun toLocalTime(value: String): LocalTime {
-        return LocalTime.parse(value)
+    fun toLocalTime(timeString: String?): LocalTime? {
+        return timeString?.let { LocalTime.parse(it) }
     }
 
     @TypeConverter
@@ -33,7 +33,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun toStatus(value: String): ColetaStatus {
-        return ColetaStatus.valueOf(value)
+    fun toStatus(status: String): ColetaStatus {
+        return ColetaStatus.valueOf(status)
     }
 }

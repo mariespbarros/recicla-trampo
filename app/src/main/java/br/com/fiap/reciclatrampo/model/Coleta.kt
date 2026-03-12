@@ -1,6 +1,7 @@
 package br.com.fiap.reciclatrampo.model
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.time.LocalDate
 import java.time.LocalTime
@@ -17,6 +18,7 @@ data class Coleta(
     val hora: LocalTime,
     val status: ColetaStatus, // SOLICITADA, ACEITA, FINALIZADA
 
+    //FK
     val empresaId: Int,
     val catadorId: Int? = null // pode ser nulo no início
 )
