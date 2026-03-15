@@ -1,25 +1,17 @@
 package br.com.fiap.reciclatrampo.screens.components
 
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
 
-
-data class BottomNavigationItem(
-    val title: String,
-    val icon: ImageVector
-)
-
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomBar(
     selectedIndex: Int,
@@ -27,34 +19,46 @@ fun BottomBar(
     onCriarClick: () -> Unit
 ) {
 
-    val items = listOf(
-        BottomNavigationItem("Home", Icons.Default.Home),
-        BottomNavigationItem("Create Coleta", Icons.Default.Create)
-    )
-
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.secondary
+        containerColor = Color(0xFF2E7D4F)
     ) {
 
-        items.forEachIndexed { index, item ->
+        NavigationBarItem(
+            selected = selectedIndex == 0,
+            onClick = { onHistoricoClick() },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.History,
+                    contentDescription = "Histórico",
+                    tint = Color.White
+                )
+            }
+        )
 
-            NavigationBarItem(
-                selected = selectedIndex == index,
+        NavigationBarItem(
+            selected = selectedIndex == 1,
+            onClick = { },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Home",
+                    tint = Color.White
+                )
+            }
+        )
 
-                onClick = {
-                    if (index == 0) onHistoricoClick()
-                    if (index == 1) onCriarClick()
-                },
+        NavigationBarItem(
+            selected = selectedIndex == 2,
+            onClick = { onCriarClick() },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Criar",
+                    tint = Color.White
+                )
+            }
+        )
 
-                icon = {
-                    Icon(
-                        imageVector = item.icon,
-                        contentDescription = item.title,
-                        tint = MaterialTheme.colorScheme.onSecondary,
-                        modifier = Modifier.size(28.dp)
-                    )
-                }
-            )
-        }
     }
+
 }
