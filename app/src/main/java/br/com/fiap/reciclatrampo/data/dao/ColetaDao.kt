@@ -28,6 +28,9 @@ interface ColetaDao {
     @Query("SELECT * FROM coletas WHERE empresaId = :empresaId")
     fun getByEmpresa(empresaId: Int): Flow<List<Coleta>>
 
+    @Query("SELECT * FROM coletas WHERE catadorId = :catadorId")
+    fun getByCatador(catadorId: Int): Flow<List<Coleta>>
+
     @Query("SELECT * FROM coletas WHERE status = 'SOLICITADA'")
     fun listarDisponiveis(): Flow<List<Coleta>>
 }

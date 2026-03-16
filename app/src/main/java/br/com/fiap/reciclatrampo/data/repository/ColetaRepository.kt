@@ -10,8 +10,16 @@ class ColetaRepository(private val dao: ColetaDao) {
         dao.solicitarColeta(coleta)
     }
 
+    suspend fun aceitarColeta(coleta: Coleta) {
+        dao.aceitarColeta(coleta)
+    }
+
     fun getByEmpresa(empresaId: Int): Flow<List<Coleta>> {
         return dao.getByEmpresa(empresaId)
+    }
+
+    fun getByCatador(catadorId: Int): Flow<List<Coleta>> {
+        return dao.getByCatador(catadorId)
     }
 
     fun listarDisponiveis(): Flow<List<Coleta>> {

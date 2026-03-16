@@ -16,11 +16,8 @@ val AmareloEscuro= Color(0xFFF2F2C8)
 val LaranjaStatus = Color(0xFFFFA000)
 val AzulStatus = Color(0xFF1976D2)
 val VerdeStatus = Color(0xFF388E3C)
+val Orange = Color(0xFFFF9800)
 
 // Fundo
 val FundoClaro = Color(0xFFF5F5F5)
 val FundoEscuro = Color(0xFF3D3D3D)
-
-val VerdePrincipal = Color(0xFF2E7D4F)
-val VerdeBotao = Color(0xFF3F8F63)
-val FundoCampo = Color(0xFFE6E3C8)

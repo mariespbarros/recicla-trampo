@@ -19,6 +19,28 @@ open class ColetaViewModel(private val repository: ColetaRepository) : ViewModel
         return repository.getByEmpresa(empresaId)
     }
 
+    fun listarDisponiveis(): Flow<List<Coleta>> {
+        return repository.listarDisponiveis()
+    }
+
+    fun listarPorCatador(catadorId: Int): Flow<List<Coleta>> {
+        // Como o DAO ainda não tem essa query específica por catador,
+        // vamos usar o getAll e filtrar ou você pode adicionar a query no DAO futuramente.
+        // Por enquanto, retornaremos todas onde o catadorId bate.
+        return repository.getByCatador(catadorId)
+    }
+
+    fun aceitarColeta(coleta: Coleta, catadorId: Int) {
+        viewModelScope.launch {
+            val coletaAtualizada = coleta.copy(
+                status = ColetaStatus.ACEITA,
+                catadorId = catadorId
+            )
+            repository.aceitarColeta(coletaAtualizada)
+            Log.d("COLETA_DEBUG", "Coleta aceita pelo catador $catadorId")
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun criarColeta(
         material: String,
