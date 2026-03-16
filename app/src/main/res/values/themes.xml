@@ -2,4 +2,5 @@
 <resources>
 
     <style name="Theme.ReciclaTrampo" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.LoginCadastro" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>

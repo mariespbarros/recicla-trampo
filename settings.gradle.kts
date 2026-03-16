@@ -22,5 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
+rootProject.name = "loginCadastro"
 rootProject.name = "ReciclaTrampo"
 include(":app")

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ReciclaTrampo</string>
+    <string name="app_name">loginCadastro</string>
+    <string name="escolha_o_tipo_de_conta">Escolha o tipo de conta</string>
+    <string name="trabalhadores_e_familia_feliz">trabalhadores e familia feliz</string>
 </resources>
